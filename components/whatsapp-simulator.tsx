@@ -11,38 +11,14 @@ export function WhatsAppSimulator({ className = '' }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
-    // --------------------------------------------------------
-    // 1. THE NEW DRAMATIC SPINNING ENTRANCE
-    // --------------------------------------------------------
+    // Entrance & Default Float
     gsap.fromTo('.phone-3d-wrapper', 
-      { 
-        y: 400,            // Start far below the screen
-        z: -600,           // Push it far back into 3D space
-        rotationX: 70,     // Tilt it almost completely flat
-        rotationY: -735,   // Spin it two full times (720) + the final 15 degrees
-        rotationZ: -20,    // Add a slight barrel roll twist
-        scale: 0.3,        // Start tiny
-        opacity: 0 
-      },
-      { 
-        y: 0, 
-        z: 0,
-        rotationX: 10, 
-        rotationY: -15, 
-        rotationZ: 0,
-        scale: 1, 
-        opacity: 1, 
-        duration: 2.5,     // Longer duration so the spin looks graceful, not frantic
-        ease: 'expo.out'   // Starts super fast, gracefully glides to a stop
-      }
+      { y: 80, z: -600, rotationX: 70, rotationY: -735, rotationZ: -20, scale: 0.3, opacity: 0 },
+      { y: 0, z: 0, rotationX: 10, rotationY: -15, rotationZ: 0, scale: 1, opacity: 1, duration: 2.5, ease: 'expo.out' }
     );
-    
-    // Continuous soft floating (up and down)
     gsap.to('.phone-3d-wrapper', { y: -15, duration: 3, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 2.5 });
 
-    // --------------------------------------------------------
-    // 2. Interactive Mouse/Touch Tracking
-    // --------------------------------------------------------
+    // Interactive Mouse/Touch Tracking
     const container = containerRef.current;
     const handleMovement = (clientX: number, clientY: number) => {
       if (!container) return;
@@ -77,41 +53,29 @@ export function WhatsAppSimulator({ className = '' }: { className?: string }) {
     container?.addEventListener('touchcancel', onLeaveOrEnd);
 
     // --------------------------------------------------------
-    // 3. UNIFORM HOLOGRAPHIC TIMELINE
+    //  HOLOGRAPHIC TIMELINE
     // --------------------------------------------------------
-    const chatTl = gsap.timeline({ repeat: -1, repeatDelay: 1.5, delay: 2.5 }) // Added initial delay so it waits for the phone to finish spinning!
+    const chatTl = gsap.timeline({ repeat: -1, repeatDelay: 1.5, delay: 2.5 }) 
 
-    // Setup States
     gsap.set('.msg-user', { autoAlpha: 0, y: 15, z: 40, scale: 0.9, transformOrigin: 'bottom right' })
     gsap.set('.msg-typing', { autoAlpha: 0, y: 15, z: 40, scale: 0.9, transformOrigin: 'bottom left' })
     gsap.set('.msg-quiqee', { autoAlpha: 0, y: 15, z: 40, scale: 0.9, transformOrigin: 'bottom left' })
-    
-    // Set all 4 items to start hidden in the exact center of the phone
     gsap.set('.pop-item', { autoAlpha: 0, scale: 0, z: 0, x: 0, y: 0 })
 
-    // A. User sends message
     chatTl.to('.msg-user', { autoAlpha: 1, y: 0, scale: 1, duration: 0.4, ease: 'back.out(1.5)' })
-      
-      // B. Typing indicator
       .to('.msg-typing', { autoAlpha: 1, y: 0, scale: 1, duration: 0.2, ease: 'back.out(1.5)' }, '+=0.6') 
       .to('.msg-typing', { autoAlpha: 0, y: -10, scale: 0.9, duration: 0.1, ease: 'power2.in' }, '+=1.5') 
-      
-      // C. Quiqee confirms the order
       .to('.msg-quiqee', { autoAlpha: 1, y: 0, scale: 1, duration: 0.4, ease: 'back.out(1.5)' }, '-=0.1') 
-
-      // D. THE MAGIC TRICK: Pop all 4 items out uniformly in different directions
       .to('.pop-item', {
         autoAlpha: 1,
         scale: 1,
-        z: 140, // Push them out toward the user
-        x: (i) => [-140, 120, -110, 130][i], // Left, Right, Left, Right
-        y: (i) => [-100, -40, 80, 160][i],    // Top, Top, Bottom, Bottom
+        z: 140, 
+        x: (i) => [-140, 120, -110, 130][i], 
+        y: (i) => [-100, -40, 80, 160][i],    
         duration: 0.8,
-        stagger: 0.1, // Slight delay between each one popping out
+        stagger: 0.1, 
         ease: 'back.out(1.5)'
       }, '+=0.6') 
-
-      // E. Fade everything out to loop
       .to(['.msg-user', '.msg-quiqee', '.pop-item'], { 
         autoAlpha: 0, scale: 0, z: 0, duration: 0.5, ease: 'power2.in' 
       }, '+=2.5') 
@@ -132,26 +96,40 @@ export function WhatsAppSimulator({ className = '' }: { className?: string }) {
 
       <div className="phone-3d-wrapper relative cursor-grab active:cursor-grabbing touch-none" style={{ transformStyle: 'preserve-3d' }}>
         
-        {/* Uniform Holographic Items */}
+        {/* Holographic Items */}
         <div className="pop-item absolute top-[40%] left-[40%] text-6xl z-[100] drop-shadow-2xl pointer-events-none" style={{ transformStyle: 'preserve-3d' }}>
           <div className="bg-white/80 backdrop-blur-md p-4 rounded-[2rem] shadow-xl border border-white/60">🍗</div>
         </div>
-        
         <div className="pop-item absolute top-[40%] left-[40%] text-6xl z-[100] drop-shadow-2xl pointer-events-none" style={{ transformStyle: 'preserve-3d' }}>
           <div className="bg-white/80 backdrop-blur-md p-4 rounded-[2rem] shadow-xl border border-white/60">🥛</div>
         </div>
-        
         <div className="pop-item absolute top-[40%] left-[40%] text-6xl z-[100] drop-shadow-2xl pointer-events-none" style={{ transformStyle: 'preserve-3d' }}>
           <div className="bg-white/80 backdrop-blur-md p-4 rounded-[2rem] shadow-xl border border-white/60">💊</div>
         </div>
-        
         <div className="pop-item absolute top-[40%] left-[40%] text-6xl z-[100] drop-shadow-2xl pointer-events-none" style={{ transformStyle: 'preserve-3d' }}>
           <div className="bg-white/80 backdrop-blur-md p-4 rounded-[2rem] shadow-xl border border-white/60">🛍️</div>
         </div>
 
-        {/* Hardware & Screen */}
+        {/* Hardware Frame */}
         <div className="phone-hardware w-[300px] h-[580px] sm:w-[320px] sm:h-[620px] bg-gray-900 rounded-[3rem] border-[4px] border-gray-800 relative" style={{ transformStyle: 'preserve-3d' }}>
-          
+          <div 
+            className="absolute inset-[-4px] bg-gray-950 rounded-[3rem] border-[4px] border-gray-800 overflow-hidden pointer-events-none shadow-[inset_0_0_20px_rgba(0,0,0,0.8)]" 
+            style={{ transform: 'translateZ(-1px) rotateY(180deg)' }}
+          >
+            {/* The Camera Bump */}
+            <div className="absolute top-8 right-8 w-16 h-32 bg-gray-900 rounded-[2rem] border border-gray-700 shadow-xl flex flex-col items-center justify-center gap-3 py-3">
+              <div className="w-10 h-10 rounded-full bg-black border-[2px] border-gray-700 shadow-inner flex items-center justify-center"><div className="w-4 h-4 rounded-full bg-gray-800/50 blur-[1px]"></div></div>
+              <div className="w-10 h-10 rounded-full bg-black border-[2px] border-gray-700 shadow-inner flex items-center justify-center"><div className="w-4 h-4 rounded-full bg-gray-800/50 blur-[1px]"></div></div>
+            </div>
+            
+            {/* Brand Logo on the back */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center opacity-20">
+              <span className="text-white font-bold text-4xl italic tracking-tighter border-2 border-white/50 p-2 rounded-xl">QQ</span>
+            </div>
+          </div>
+
+
+          {/* The Front Screen */}
           <div className="absolute inset-[10px] bg-[#efeae2] rounded-[2.2rem] overflow-hidden pointer-events-none">
             <div className="phone-glare absolute inset-0 bg-gradient-to-tr from-white/0 via-white/40 to-white/0 z-50 pointer-events-none -translate-x-[100%] skew-x-12 opacity-0 mix-blend-overlay"></div>
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-gray-900 rounded-b-3xl z-40"></div>
@@ -180,7 +158,7 @@ export function WhatsAppSimulator({ className = '' }: { className?: string }) {
             </div>
 
             <div className="msg-user self-end bg-[#d9fdd3] text-[#111b21] rounded-2xl rounded-tr-sm px-3 pt-2 pb-3 max-w-[85%] shadow-xl relative text-[15px] leading-[1.3] border border-black/5">
-              Hi, I need 1kg chicken, 2 liters of milk, and some paracetamol.
+              Hi, I need 1kg chicken, 2 liters of milk, and french fries.
               <div className="text-[10px] text-gray-500 text-right mt-1 -mb-1 flex justify-end items-center gap-1">
                 10:42 AM
                 <svg viewBox="0 0 16 15" width="16" height="15" className="fill-blue-500"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.879a.32.32 0 0 1-.484.033l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.879a.32.32 0 0 1-.484.033L1.891 7.769a.366.366 0 0 0-.515.006l-.423.433a.364.364 0 0 0 .006.514l3.258 3.185c.143.14.361.125.484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"></path></svg>
