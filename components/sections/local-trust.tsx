@@ -118,7 +118,7 @@ export function LocalTrust() {
             <div className="relative aspect-square max-w-sm mx-auto">
               
               {/* Map Container */}
-              <div className="absolute inset-0 rounded-3xl overflow-hidden border-4 border-white/20 shadow-2xl bg-white">
+              <div className="absolute inset-0 rounded-3xl overflow-hidden border border-white/20 shadow-2xl bg-white">
 
                 {/* INTERACTIVE MAP VIEW */}
                 <InteractiveMap />
