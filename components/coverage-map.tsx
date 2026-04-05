@@ -60,7 +60,6 @@ export default function CoverageMap() {
 }
 
 const customOrangeIcon = L.divIcon({
-  // We use inline styles here because Leaflet injects this directly into the DOM
   html: `
     <div style="
       display: flex; 
@@ -79,9 +78,9 @@ const customOrangeIcon = L.divIcon({
       </svg>
     </div>
   `,
-  className: '', // Clear default leaflet classes
+  className: '', 
   iconSize: [36, 36],
-  iconAnchor: [18, 36], // Points the bottom-center of our 36px circle to the exact map coordinates
-  popupAnchor: [0, -40], // Pushes the popup box above the custom icon
+  iconAnchor: [18, 36], 
+  popupAnchor: [0, -40], // popup box above the custom icon
   tooltipAnchor: [0, -40],
 });
