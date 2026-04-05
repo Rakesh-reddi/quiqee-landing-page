@@ -1,63 +1,15 @@
 'use client'
 
-import { useRef } from 'react'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
 
 import { QuiqeeLogo } from '@/components/quiqee-logo'
 import { WhatsAppButton } from '@/components/whatsapp-button'
 import { AnimatedScooter } from '@/components/animated-scooter'
 import { Clock, Store, Smartphone, ChevronDown, Zap } from 'lucide-react'
-
-// Register GSAP plugin
-gsap.registerPlugin(useGSAP);
+import { useRef } from 'react'
+import { useScooterAnimation } from '@/hooks/use-scooter-animation'
 
 export function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  useGSAP(() => {
-    // Master Timeline: Control micro-animations
-    const tl=gsap.timeline({ repeat: -1});
-
-    //Push scooter off-screen right, hide tags
-    gsap.set('.scooter-drive-wrapper', { x: '100vw' });
-    gsap.set('.gsap-tag', { autoAlpha: 0, scale: 0.5 });
-
-    // Drive in scooter
-    tl.to('.scooter-drive-wrapper', {
-      x: '0',
-      duration: 1.6,
-      ease: 'power2.out'
-    })
-    
-    // Float tags in 
-    .to('.gsap-tag', {
-      autoAlpha: 1,
-      scale: 1,
-      duration: 0.5,
-      stagger: 0.15,
-      ease: 'back.out(1.7)'
-    })
-
-    // Pause in center for a moment
-    .to({}, { duration: 3 })
-  
-    // Shrink and fade out tags
-    .to('.gsap-tag', {
-      autoAlpha: 0,
-      scale: 0.5,
-      duration: 0.3,
-      stagger: 0.1,
-      ease: 'power2.in'
-    })
-
-    // Drive scooter off-screen left
-    .to('.scooter-drive-wrapper', {
-      x: '-100vw',
-      duration: 1.6,
-      ease: 'power2.in'
-    });
-  },{scope: containerRef}
-  );
+  const containerRef = useScooterAnimation();
 
 
   return (
@@ -136,6 +88,15 @@ export function Hero() {
                 {/* Scooter */}
                 <div className='scooter-drive-wrapper relative z-10 w-full h-auto drop-shadow-2xl'>
                   <AnimatedScooter />
+                  {/* Dust Trails*/}
+                  <div className="absolute bottom-4 right-1/4 z-[-1]">
+                    {[...Array(6)].map((_, i) => (
+                      <div 
+                        key={i} 
+                        className="dust-particle absolute w-4 h-4 bg-gray-300/60 rounded-full blur-[2px]"
+                      />
+                    ))}
+                  </div>
                 </div>
                 
                 
