@@ -19,13 +19,13 @@ export function Hero() {
     const tl=gsap.timeline({ repeat: -1});
 
     //Push scooter off-screen right, hide tags
-    gsap.set('.scooter-drive-wrapper', { x: '120%' });
+    gsap.set('.scooter-drive-wrapper', { x: '100vw' });
     gsap.set('.gsap-tag', { autoAlpha: 0, scale: 0.5 });
 
     // Drive in scooter
     tl.to('.scooter-drive-wrapper', {
-      x: '0%',
-      duration: 1.5,
+      x: '0',
+      duration: 1.6,
       ease: 'power2.out'
     })
     
@@ -52,8 +52,8 @@ export function Hero() {
 
     // Drive scooter off-screen left
     .to('.scooter-drive-wrapper', {
-      x: '-120%',
-      duration: 1.5,
+      x: '-100vw',
+      duration: 1.6,
       ease: 'power2.in'
     });
   },{scope: containerRef}
