@@ -1,13 +1,19 @@
 'use client'
 
+
 import { QuiqeeLogo } from '@/components/quiqee-logo'
 import { WhatsAppButton } from '@/components/whatsapp-button'
 import { AnimatedScooter } from '@/components/animated-scooter'
 import { Clock, Store, Smartphone, ChevronDown, Zap } from 'lucide-react'
+import { useRef } from 'react'
+import { useScooterAnimation } from '@/hooks/use-scooter-animation'
 
 export function Hero() {
+  const containerRef = useScooterAnimation();
+
+
   return (
-    <section className="relative min-h-[100dvh] bg-gradient-to-b from-[#FFFCFA] via-white to-[#FFF8F3] overflow-hidden">
+    <section ref={containerRef} className="relative min-h-[100dvh] bg-gradient-to-b from-[#FFFCFA] via-white to-[#FFF8F3] overflow-hidden">
       {/* Minimal background - soft radial glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-gradient-radial from-[#FF6B00]/8 via-[#FF6B00]/3 to-transparent rounded-full blur-3xl" />
@@ -75,42 +81,41 @@ export function Hero() {
               </div>
             </div>
             
-            {/* Right Content - Premium Animated Scooter */}
+            {/* Right Content - Animated Scooter */}
             <div className="relative flex items-center justify-center lg:justify-end order-first lg:order-last mt-4 lg:mt-0">
               <div className="relative w-full max-w-sm md:max-w-md lg:max-w-xl">
                 
                 {/* Scooter */}
-                <AnimatedScooter className="relative z-10 w-full h-auto drop-shadow-2xl" />
+                <div className='scooter-drive-wrapper relative z-10 w-full h-auto drop-shadow-2xl'>
+                  <AnimatedScooter />
+                  {/* Dust Trails*/}
+                  <div className="absolute bottom-4 right-1/4 z-[-1]">
+                    {[...Array(6)].map((_, i) => (
+                      <div 
+                        key={i} 
+                        className="dust-particle absolute w-4 h-4 bg-gray-300/60 rounded-full blur-[2px]"
+                      />
+                    ))}
+                  </div>
+                </div>
                 
-                {/* Clean floating UI tags - startup style */}
-                <FloatingTag 
-                  className="absolute -top-1 right-8 md:right-12" 
-                  delay={0}
-                  color="orange"
-                >
-                  Food
-                </FloatingTag>
-                <FloatingTag 
-                  className="absolute top-1/4 -left-2 md:left-0" 
-                  delay={0.2}
-                  color="green"
-                >
-                  Groceries
-                </FloatingTag>
-                <FloatingTag 
-                  className="absolute top-1/2 -right-1 md:right-4" 
-                  delay={0.4}
-                  color="blue"
-                >
-                  Medicines
-                </FloatingTag>
-                <FloatingTag 
-                  className="absolute bottom-16 left-6 md:left-12" 
-                  delay={0.6}
-                  color="red"
-                >
-                  Essentials
-                </FloatingTag>
+                
+                {/* floating UI tags*/}
+                <div className="gsap-tag absolute -top-1 right-8 md:right-12 z-20">
+                  <FloatingTag delay={0} color="orange">Food</FloatingTag>
+                </div>
+                
+                <div className="gsap-tag absolute top-1/4 -left-2 md:left-0 z-20">
+                  <FloatingTag delay={0.2} color="green">Groceries</FloatingTag>
+                </div>
+                
+                <div className="gsap-tag absolute top-1/2 -right-1 md:right-4 z-20">
+                  <FloatingTag delay={0.4} color="blue">Medicines</FloatingTag>
+                </div>
+                
+                <div className="gsap-tag absolute bottom-16 left-6 md:left-12 z-20">
+                  <FloatingTag delay={0.6} color="red">Essentials</FloatingTag>
+                </div>
               </div>
             </div>
           </div>
