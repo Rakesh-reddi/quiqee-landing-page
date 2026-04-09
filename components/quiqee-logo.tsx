@@ -27,7 +27,7 @@ export function QuiqeeLogo({ className = '', variant = 'default', size = 'md' }:
   return (
     <div className={`flex items-center ${className}`}>
       <Image 
-        src="/images/quiqee-logo.jpeg"
+        src="/images/quiqee-logo-style1.png"
         alt="Quiqee - Fast Delivery"
         width={180}
         height={180}
