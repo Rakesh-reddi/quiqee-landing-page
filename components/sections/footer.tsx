@@ -16,11 +16,11 @@ export function Footer() {
           <div className="lg:col-span-2">
             <div className="mb-6">
               <Image 
-                src="/images/quiqee-logo.jpeg"
+                src="/images/quiqee-logo-style2.png"
                 alt="Quiqee - Fast Delivery"
                 width={200}
                 height={200}
-                className="h-20 w-auto object-contain rounded-xl"
+                className="h-12 w-auto object-contain rounded-xl"
                 priority
               />
             </div>
