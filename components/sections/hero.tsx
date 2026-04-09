@@ -21,12 +21,14 @@ export function Hero() {
       
       {/* Navigation */}
       <nav className="relative z-20 flex items-center justify-between px-4 py-4 md:px-8 lg:px-16">
+        <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
         <QuiqeeLogo size="md" />
         <WhatsAppButton 
           text="Order Now" 
           size="default"
           className="hidden sm:flex"
         />
+        </div>
       </nav>
 
       {/* Hero Content */}
@@ -35,7 +37,7 @@ export function Hero() {
           <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
             
             {/* Left Content */}
-            <div className="text-center lg:text-left space-y-5 md:space-y-6">
+            <div className="text-center lg:text-left space-y-5 md:space-y-6 max-w-xl">
               {/* Live badge */}
               <div className="inline-flex items-center gap-2 bg-[#FF6B00]/10 text-[#FF6B00] px-4 py-2 rounded-full text-sm font-semibold border border-[#FF6B00]/20 backdrop-blur-sm">
                 <span className="relative flex h-2 w-2">

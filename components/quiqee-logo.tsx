@@ -8,10 +8,10 @@ interface QuiqeeLogoProps {
 
 export function QuiqeeLogo({ className = '', variant = 'default', size = 'md' }: QuiqeeLogoProps) {
   const sizeClasses = {
-    sm: 'h-8',
-    md: 'h-10',
-    lg: 'h-12',
-    xl: 'h-16'
+    sm: 'h-16',
+    md: 'h-18',
+    lg: 'h-18',
+    xl: 'h-20'
   }
   
   // For white variant (footer, dark backgrounds), use SVG recreation
