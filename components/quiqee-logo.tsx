@@ -8,8 +8,8 @@ interface QuiqeeLogoProps {
 
 export function QuiqeeLogo({ className = '', variant = 'default', size = 'md' }: QuiqeeLogoProps) {
   const sizeClasses = {
-    sm: 'h-14',
-    md: 'h-16',
+    sm: 'h-16',
+    md: 'h-18',
     lg: 'h-18',
     xl: 'h-20'
   }
