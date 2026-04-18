@@ -27,21 +27,20 @@ export const metadata: Metadata = {
   keywords: ['delivery', 'WhatsApp delivery', 'hyperlocal', 'groceries', 'food delivery', 'Mokila', 'fast delivery'],
   generator: 'v0.app',
   icons: {
-    icon: [
+  icon: [
+    { url: '/favicon.ico' },
+    { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+    { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+  apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180' },
+    ],
+  other: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
+        rel: 'manifest',
+        url: '/site.webmanifest',
       },
     ],
-    apple: '/apple-icon.png',
   },
 }
 
